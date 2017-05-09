@@ -1,4 +1,38 @@
 var React = require('react');
+var PropTypes = require('prop-types');
+
+class PlayerInput extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: ''
+    }
+  }
+  render() {
+    return (
+      <form className='column'>
+        <label className='header' htmlFor='username'>
+          {this.props.label}
+        </label>
+        <input
+          id='username'
+          placeholder='github username'
+          type='text'
+          autoComplete='off'
+          value={this.state.username}
+          onChange={this.handleChange}
+        />
+      </form>
+    )
+  }
+}
+
+PlayerInput.propTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired
+}
 
 class Battle extends React.Component {
   constructor(props) {
@@ -29,10 +63,18 @@ class Battle extends React.Component {
       <div>
         <div className='row'>
           {!playerOneName &&
-            <PlayerInput />}
+            <PlayerInput
+              id='playerOne'
+              label='Player One'
+              onSubmit={this.handleSubmit}
+            />}
 
           {!playerTwoName &&
-            <PlayerInput />}
+            <PlayerInput
+              id='playerTwo'
+              label='Player Two'
+              onSubmit={this.handleSubmit}
+            />}
         </div>
       </div>
     )
