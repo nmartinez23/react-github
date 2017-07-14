@@ -1,7 +1,23 @@
 var React = require('react');
+var Proptypes = require('prop-types');
 var queryString = require('query-string');
 var api = require('../utils/api');
 var Link = require('react-router-dom').Link;
+
+function Player (props) {
+  return (
+    <div>
+      <h1 className='header'>{props.label}</h1>
+      <h3 style={{textAlign: 'center'}}>Score: {props.score}</h3>
+    </div>
+  )
+}
+
+Player.propTypes = {
+  label: Proptypes.string.isRequired,
+  score: Proptypes.number.isRequired,
+  profile: Proptypes.object.isRequired,
+}
 
 class Results extends React.Component {
   constructor(props) {
@@ -60,7 +76,18 @@ class Results extends React.Component {
     }
 
     return (
-      <div>{JSON.stringify(this.state, null, 2)}</div>
+      <div className='row'>
+        <Player
+          label='Winner'
+          score={winner.score}
+          profile={winner.profile}
+        />
+        <Player
+          label='Loser'
+          score={loser.score}
+          profile={loser.profile}
+        />
+      </div>
     )
   }
 }
