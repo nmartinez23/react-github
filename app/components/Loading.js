@@ -9,13 +9,28 @@ var styles = {
 };
 
 class Loading extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      text: props.text
+    };
+  }
   render() {
     return (
-      <p style={styles.content}
+      <p style={styles.content}>
         {this.state.text}
       </p>
     )
   }
 }
+
+Loading.PropTypes = {
+  text: PropTypes.string.isRequired
+};
+
+Loading.defaultProps = {
+  text: 'Loading'
+};
 
 module.exports = Loading;
